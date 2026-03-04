@@ -197,7 +197,7 @@
     }
     #templeBg {
       position: absolute;
-      top: -220px; bottom: -220px; left: 0; right: 0;
+      top: -45vh; bottom: -45vh; left: 0; right: 0;
       background-image: url('https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1920&q=85');
       background-size: cover;
       background-position: center 28%;
@@ -1003,6 +1003,111 @@
       .cdwn-units { gap: .7rem; }
     }
     .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ===== VENUE SECTION ===== */
+    .venue-section {
+      background: linear-gradient(180deg, #000 0%, #06040a 60%, #000 100%);
+      padding: 8vh 0 10vh;
+      position: relative; z-index: 10;
+      text-align: center;
+    }
+    .venue-heading { margin-bottom: 2.5rem; }
+    .venue-super {
+      display: block;
+      font-family: "Cinzel", serif;
+      font-size: .62rem; letter-spacing: .42em; text-transform: uppercase;
+      color: #c8931a; margin-bottom: .6rem;
+    }
+    .venue-heading h2 {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2.4rem, 7vw, 4.8rem);
+      font-weight: 400; color: #f5dda0;
+      text-shadow: 0 0 60px rgba(200,147,26,.4);
+      line-height: 1;
+    }
+    .venue-rule {
+      display: block; width: 56px; height: 1px;
+      background: linear-gradient(90deg, transparent, #c8931a, transparent);
+      margin: 1rem auto 0;
+    }
+    .venue-card {
+      width: min(620px, 88vw);
+      margin: 0 auto 2.5rem;
+      padding: 2.2rem clamp(1.4rem, 5vw, 2.8rem);
+      background: linear-gradient(160deg, #100a04, #0c0804);
+      border: 1px solid rgba(200,147,26,.28);
+      border-radius: 2px;
+      box-shadow: 0 4px 48px rgba(0,0,0,.7), 0 0 60px rgba(180,100,0,.04);
+      position: relative;
+    }
+    .venue-card::before, .venue-card::after {
+      content: '✦'; position: absolute; top: -.62rem;
+      background: #100a04; padding: 0 .55rem;
+      color: rgba(200,147,26,.5); font-size: .6rem;
+    }
+    .venue-card::before { left: 50%; transform: translateX(-50%); }
+    .venue-card::after  { top: auto; bottom: -.62rem; left: 50%; transform: translateX(-50%); }
+    .venue-card-icon { font-size: 1.6rem; margin-bottom: .5rem; line-height: 1; }
+    .venue-name {
+      font-family: "Cinzel", serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: #f5dda0; letter-spacing: .12em; font-weight: 500;
+      margin-bottom: .4rem;
+    }
+    .venue-tagline {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(.88rem, 1.3vw, 1.02rem);
+      color: #c8931a; font-style: italic;
+      margin-bottom: 1.1rem;
+    }
+    .venue-desc {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(.9rem, 1.2vw, 1.04rem);
+      color: rgba(230,205,160,.68);
+      line-height: 1.82; font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+    .venue-address {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-family: "Cinzel", serif;
+      font-size: clamp(.52rem, .9vw, .64rem);
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(200,160,80,.55);
+      border-top: 1px solid rgba(200,147,26,.12);
+      padding-top: .9rem; width: 100%; justify-content: center;
+    }
+    .venue-photo-wrap {
+      width: min(700px, 92vw);
+      margin: 0 auto 2rem;
+      border: 1px solid rgba(200,147,26,.22);
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,.7);
+    }
+    .venue-photo-wrap img {
+      width: 100%; height: clamp(220px, 38vw, 400px);
+      display: block;
+      object-fit: cover;
+      object-position: center 60%;
+      filter: saturate(1.05) brightness(.9);
+      transition: transform .6s ease, filter .4s ease;
+    }
+    .venue-photo-wrap img:hover {
+      transform: scale(1.025);
+      filter: saturate(1.1) brightness(.95);
+    }
+    .venue-dir-btn {
+      display: inline-block; text-decoration: none;
+      font-family: "Cinzel", serif;
+      font-size: .64rem; letter-spacing: .28em; text-transform: uppercase;
+      font-weight: 700; color: #0e0b08;
+      background: linear-gradient(135deg, #c8922a, #e8b840 50%, #c8922a);
+      padding: .75rem 2.4rem; border-radius: 1px;
+      box-shadow: 0 4px 24px rgba(200,146,42,.25);
+      transition: transform .2s, box-shadow .2s, filter .2s;
+    }
+    .venue-dir-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(200,146,42,.4); filter: brightness(1.08); }
+
     @media (max-width:640px) {
       .kv-lamp { height: clamp(140px, 26vh, 240px); }
     }
@@ -1717,7 +1822,7 @@
           <span class="cb-datetime-reception">Reception &bull; Saturday, 22<sup>nd</sup> August &bull; 6:00 PM &mdash; 9:00 PM</span>
         </div>
 
-        <p class="cb-dress">Dress code &ensp;&mdash;&ensp; <strong>Traditional Indian Attire</strong></p>
+        <!-- <p class="cb-dress">Dress code &ensp;&mdash;&ensp; <strong>Traditional Indian Attire</strong></p> -->
 
         <a class="rsvp-btn" href="mailto:rsvp@example.com?subject=Wedding RSVP">Confirm Attendance</a>
 
@@ -1734,12 +1839,12 @@
 <!--  SECTION 4: EVENTS  -->
 <section class="timeline-section">
   <div class="tl-heading reveal">
-    <h2>Celebrations &amp; Schedule</h2>
+    <h2>Celebrations &amp; Schedule (Tentative)</h2>
     <p>Join us across these joyful ceremonies</p>
   </div>
   <div class="ev-list">
 
-    <div class="ev-item">
+    <!-- <div class="ev-item">
       <div class="ev-ribbon"></div>
       <div class="ev-body">
         <span class="ev-num">01</span>
@@ -1749,16 +1854,16 @@
         <p class="ev-details">A joyful pre-wedding ritual where the couple is adorned with turmeric and sandalwood paste by family elders, accompanied by music and playful Tamil traditions.</p>
         <span class="ev-tag">Pre-Wedding &bull; Tamil Rituals &bull; Family</span>
       </div>
-    </div>
+    </div> -->
 
     <div class="ev-item">
       <div class="ev-ribbon"></div>
       <div class="ev-body">
         <span class="ev-num">02</span>
-        <span class="ev-day">Saturday, 22 August 2026 &mdash; 11:00 AM</span>
-        <p class="ev-name">Engagement</p>
+        <span class="ev-day">Saturday, 22 August 2026 &mdash; 11:00 AM (Tentative)</span>
+        <p class="ev-name">Nichayathartham (Engagement)</p>
         <p class="ev-when">11:00 AM &bull; Kayal Wedding Hall, Coimbatore</p>
-        <p class="ev-details">The traditional engagement ceremony where rings are exchanged and the two families formally unite in celebration and blessings.</p>
+        <p class="ev-details">The Hindu traditional engagement ceremony where rings are exchanged and the two families formally unite in celebration and blessings.</p>
         <span class="ev-tag">Engagement &bull; Rings &bull; Blessings</span>
       </div>
     </div>
@@ -1768,9 +1873,9 @@
       <div class="ev-body">
         <span class="ev-num">03</span>
         <span class="ev-day">Saturday, 22 August 2026 &mdash; Evening</span>
-        <p class="ev-name">Reception</p>
+        <p class="ev-name">Varavetpu Vizha (Reception)</p>
         <p class="ev-when">6:00 PM &mdash; 9:00 PM &bull; Kayal Wedding Hall, Coimbatore</p>
-        <p class="ev-details">Celebrate the soon-to-be newly-weds over a lavish evening with warmth, music and the joy of two families becoming one.</p>
+        <p class="ev-details">Celebrate the soon-to-be newlyweds in a lavish evening of warmth and music, joined by 1,000 guests sharing their blessings as two families become one.</p>
         <span class="ev-tag">Dinner &bull; Music &bull; Celebrations</span>
       </div>
     </div>
@@ -1780,10 +1885,10 @@
       <div class="ev-body">
         <span class="ev-num">04</span>
         <span class="ev-day">Wedding Day &mdash; Sunday, 23 August 2026</span>
-        <p class="ev-name">Sacred Muhurtham</p>
-        <p class="ev-when">5:00 AM &ndash; 6:00 AM &bull; Vaikasi Visakam &bull; Kayal Wedding Hall, Coimbatore</p>
-        <p class="ev-details">The sacred fire witnesses the Sapta Padi as Swasthik ties the Thali around Priyanga&rsquo;s neck &mdash; two souls bound for eternity under the auspicious Vaikasi Visakam nakshatra.</p>
-        <span class="ev-tag">Sapta Padi &bull; Thali &bull; Vedic Rites</span>
+        <p class="ev-name">Muhurtham</p>
+        <p class="ev-when">5:00 AM &ndash; 6:00 AM &bull; Kayal Wedding Hall, Coimbatore</p>
+        <p class="ev-details">At the sacred fire, Swasthik ties the thaali around Priyanga’s neck, two souls united for eternity at the auspicious muhurtham, blessed by family and the stars above.</p>
+        <span class="ev-tag">Homa &bull; Thali &bull; Vedic Rites</span>
       </div>
     </div>
 
@@ -1822,6 +1927,50 @@
 
 <div class="plane-divider"><span class="plane-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#c8931a"><path d="M62 30.5L46 18l-2 2 8 10H36L24 8H18l8 22H6L2 24H0l2 8-2 8h2l4-6h20l-8 22h6l12-22h16l-8 10 2 2z"/></svg></span></div>
 -->
+
+<!--  VENUE SECTION  -->
+<div class="plane-divider"><span class="plane-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#c8931a"><path d="M62 30.5L46 18l-2 2 8 10H36L24 8H18l8 22H6L2 24H0l2 8-2 8h2l4-6h20l-8 22h6l12-22h16l-8 10 2 2z"/></svg></span></div>
+
+<section class="venue-section" id="venueSection">
+
+  <div class="venue-heading reveal">
+    <span class="venue-super">The Setting</span>
+    <h2>Find Us</h2>
+    <span class="venue-rule"></span>
+  </div>
+
+  <div class="venue-card reveal" style="transition-delay:.12s">
+    <span class="venue-card-icon">&#x1F4CD;</span>
+    <h3 class="venue-name">Kayal Wedding Hall</h3>
+    <p class="venue-tagline">An Elegant Celebration Space in the Heart of Coimbatore</p>
+    <p class="venue-desc">
+      Nestled in the cultural heart of Coimbatore, Kayal Wedding Hall is a distinguished
+      banquet venue cherished for its warm ambience, spacious halls, and seamless hospitality.
+      Thoughtfully crafted to honour Tamil wedding traditions, the hall welcomes guests with
+      ornate d&eacute;cor, fragrant floral arrangements, and every comfort to make your
+      experience truly memorable.
+    </p>
+    <div class="venue-address">
+      &#x2726;&ensp;Kayal Wedding Hall, Coimbatore, Tamil Nadu&ensp;&#x2726;
+    </div>
+  </div>
+
+  <div class="venue-photo-wrap reveal" style="transition-delay:.24s">
+    <img
+      src="https://lh3.googleusercontent.com/p/AF1QipOlUkCK90RpiwUk7jn88WzMDMtO-wKLFFfut3n8=w1200-h900-k-no"
+      alt="Kayal Wedding Hall, Coimbatore"
+      loading="lazy">
+  </div>
+
+  <div class="reveal" style="transition-delay:.32s">
+    <a class="venue-dir-btn"
+       href="https://maps.app.goo.gl/cbCEEAivZLj9LJKNA"
+       target="_blank" rel="noopener">
+      Get Directions
+    </a>
+  </div>
+
+</section>
 
 <!--  SECTION 6: COUNTDOWN  -->
 <p class="page-footer reveal" style="transition-delay:.3s">
@@ -1874,11 +2023,12 @@
   const isTouchDevice = window.matchMedia('(hover: none)').matches || 'ontouchstart' in window;
   if (!isTouchDevice) {
     function update() {
-      const sy = window.scrollY;
-      const tTop = templeSection.offsetTop;
-      const tProgress = sy - tTop;
-      if (tProgress > -window.innerHeight && tProgress < templeSection.offsetHeight + window.innerHeight) {
-        templeBg.style.transform = 'translateZ(0) translateY(' + (tProgress * 0.38) + 'px)';
+      const rect = templeSection.getBoundingClientRect();
+      // Only update when section is near-visible
+      if (rect.bottom > -window.innerHeight && rect.top < window.innerHeight * 2) {
+        // tProgress = 0 when section top aligns with viewport top
+        const tProgress = -rect.top;
+        templeBg.style.transform = 'translateZ(0) translateY(' + (tProgress * 0.38).toFixed(2) + 'px)';
       }
     }
     let rafId = null;
@@ -2071,20 +2221,22 @@
 })();
 </script>
 
-<!-- YouTube IFrame API: setup FIRST, then load API so callback is ready -->
+<!-- YouTube IFrame API -->
 <script>
 (function () {
   var ytPlayer, ytReady = false, wantPlay = false;
+  var btn = document.getElementById('musicBtn');
+  var playing = false;
 
   window.onYouTubeIframeAPIReady = function () {
     ytPlayer = new YT.Player('ytPlayer', {
       width: '1',
       height: '1',
-      videoId: '7nIZ5hLru80',
+      videoId: '92mXA_slVhc',
       playerVars: {
         autoplay: 0,
         loop: 1,
-        playlist: '7nIZ5hLru80',
+        playlist: '92mXA_slVhc',
         controls: 0,
         disablekb: 1,
         fs: 0,
@@ -2097,7 +2249,11 @@
         onReady: function () {
           ytReady = true;
           ytPlayer.setVolume(60);
-          if (wantPlay) { ytPlayer.playVideo(); }
+          if (wantPlay) {
+            ytPlayer.playVideo();
+            playing = true;
+            btn.classList.remove('paused');
+          }
         },
         onError: function (e) {
           console.warn('YT player error:', e.data);
@@ -2106,14 +2262,22 @@
     });
   };
 
-  var btn = document.getElementById('musicBtn');
-  var playing = false;
+  /* Called by the gate once it opens — user gesture satisfies autoplay policy */
+  window.startMusic = function () {
+    if (!playing) {
+      wantPlay = true;
+      if (ytReady) {
+        ytPlayer.playVideo();
+        playing = true;
+        btn.classList.remove('paused');
+      }
+    }
+  };
 
   btn.addEventListener('click', function () {
     if (!ytReady) {
-      wantPlay = true;
-      btn.classList.remove('paused');
-      playing = true;
+      wantPlay = !wantPlay;
+      btn.classList.toggle('paused', !wantPlay);
       return;
     }
     if (playing) {
@@ -2149,6 +2313,7 @@
     cancelLongPress();
     gate.classList.add('opening');
     document.body.classList.remove('gate-locked');
+    if (window.startMusic) window.startMusic();
     setTimeout(function () {
       gate.style.display = 'none';
     }, 1350);
