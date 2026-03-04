@@ -575,47 +575,23 @@
     .card.open:not(.tilting) { animation: cardFloat 7s ease-in-out infinite; }
     .card.tilting { transition: transform .09s ease-out, box-shadow .15s ease !important; animation: none !important; }
     /* ===== PLANE DIVIDER ===== */
-    .plane-divider {
-      position: relative; height: 54px; overflow: visible;
-      display: flex; align-items: center;
-      background: transparent; z-index: 5;
-      margin: 0;
+    .orn-divider {
+      position: relative; display: flex; align-items: center;
+      justify-content: center; height: 64px; z-index: 5; margin: 0;
+      opacity: 0; transform: scaleX(.7);
+      transition: opacity .9s ease, transform .9s ease;
     }
-    /* dashed track */
-    .plane-divider::before {
-      content: '';
-      position: absolute; left: 0; right: 0; top: 50%;
-      height: 1px;
-      background: repeating-linear-gradient(90deg,
-        rgba(200,147,26,.35) 0px, rgba(200,147,26,.35) 8px,
-        transparent 8px, transparent 18px);
-      transform: translateY(-50%);
+    .orn-divider.visible { opacity: 1; transform: scaleX(1); }
+    .orn-divider::before, .orn-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(200,147,26,.18) 15%, rgba(212,164,87,.6) 55%, rgba(245,224,160,.85) 100%);
     }
-    .plane-icon {
-      position: absolute;
-      left: -6%;
-      width: 36px; height: 36px;
-      filter: drop-shadow(0 0 10px rgba(200,147,26,.85));
-      opacity: 0;
-      pointer-events: none;
-      display: flex; align-items: center;
+    .orn-divider::after {
+      background: linear-gradient(270deg, transparent 0%, rgba(200,147,26,.18) 15%, rgba(212,164,87,.6) 55%, rgba(245,224,160,.85) 100%);
     }
-    .plane-divider.fly .plane-icon {
-      animation: planeFly 3.4s cubic-bezier(.4,0,.3,1) forwards;
-    }
-    @keyframes planeFly {
-      0%   { left: -6%;   opacity: 0; }
-      6%   { opacity: 1; }
-      93%  { opacity: 1; }
-      100% { left: 106%;  opacity: 0; }
-    }
-    /* glow trail */
-    .plane-divider::after {
-      content: '';
-      position: absolute; top: 50%; left: 0; right: 0;
-      height: 3px; margin-top: -1.5px;
-      background: linear-gradient(90deg, transparent 0%, rgba(200,147,26,.0) 100%);
-      pointer-events: none;
+    .orn-divider-motif {
+      flex-shrink: 0; width: 56px; height: 56px; margin: 0 1.2rem;
+      filter: drop-shadow(0 0 10px rgba(212,164,87,.5));
     }
 
     /* ===== MEET THE COUPLE / MAP SECTION ===== */
@@ -1171,15 +1147,63 @@
     .gate-kolam.tr { top: 14px; right: 14px; transform: scaleX(-1); }
     .gate-kolam.br { bottom: 14px; right: 14px; transform: scale(-1,-1); }
 
-    /* vertical lamp decoration on each panel */
-    .gate-lamp-deco {
+    /* ornate inner-edge secondary line on each panel */
+    .gate-half::after {
+      content: '';
       position: absolute;
-      bottom: 0;
-      opacity: 0.25;
-      pointer-events: none;
+      top: 22px; bottom: 22px;
+      width: 1px;
+      background: repeating-linear-gradient(
+        180deg,
+        transparent 0px, transparent 6px,
+        rgba(212,164,87,.22) 6px, rgba(212,164,87,.22) 8px,
+        transparent 8px, transparent 16px,
+        rgba(245,224,160,.12) 16px, rgba(245,224,160,.12) 18px
+      );
     }
-    .gate-left  .gate-lamp-deco { right: 28px; }
-    .gate-right .gate-lamp-deco { left: 28px; }
+    .gate-left::after  { right: 6px; }
+    .gate-right::after { left: 6px; }
+
+    /* gate toran garland */
+    .gate-toran {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 8;
+      pointer-events: none;
+      line-height: 0;
+    }
+
+    /* gate floating petals */
+    .gate-petals-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .gate-fp {
+      position: absolute;
+      top: -14px;
+      border-radius: 60% 40% 60% 40%;
+      opacity: 0;
+      animation: gateFP linear infinite;
+    }
+    .gate-fp:nth-child(1)  { left:  6%; width:6px;  height:10px; background:radial-gradient(#ffcc66,#e85c20 80%); animation-duration:9s;   animation-delay:0.3s; }
+    .gate-fp:nth-child(2)  { left: 18%; width:5px;  height:8px;  background:radial-gradient(#ff9944,#cc3300 80%); animation-duration:11s;  animation-delay:2.1s; }
+    .gate-fp:nth-child(3)  { left: 32%; width:7px;  height:11px; background:radial-gradient(#ffdd88,#e86020 80%); animation-duration:8.5s; animation-delay:4.4s; }
+    .gate-fp:nth-child(4)  { left: 47%; width:6px;  height:9px;  background:radial-gradient(#ffaa44,#dd4400 80%); animation-duration:12s;  animation-delay:1.0s; }
+    .gate-fp:nth-child(5)  { left: 61%; width:7px;  height:10px; background:radial-gradient(#ffcc66,#e85c20 80%); animation-duration:10s;  animation-delay:3.2s; }
+    .gate-fp:nth-child(6)  { left: 75%; width:5px;  height:8px;  background:radial-gradient(#ff9944,#cc3300 80%); animation-duration:9.5s; animation-delay:0.8s; }
+    .gate-fp:nth-child(7)  { left: 87%; width:7px;  height:11px; background:radial-gradient(#ffdd88,#e86020 80%); animation-duration:11s;  animation-delay:5.5s; }
+    .gate-fp:nth-child(8)  { left: 42%; width:5px;  height:8px;  background:radial-gradient(#ffbb55,#dd3300 80%); animation-duration:7.5s; animation-delay:2.8s; }
+    .gate-fp:nth-child(9)  { left: 12%; width:8px;  height:12px; background:radial-gradient(#ffe0a0,#e87030 80%); animation-duration:13s;  animation-delay:6.0s; }
+    .gate-fp:nth-child(10) { left: 93%; width:6px;  height:9px;  background:radial-gradient(#ffcc66,#e85c20 80%); animation-duration:8s;   animation-delay:1.6s; }
+    @keyframes gateFP {
+      0%   { transform: translateY(0) rotate(0deg);   opacity: 0; }
+      7%   { opacity: .65; }
+      84%  { opacity: .38; }
+      100% { transform: translateY(105vh) rotate(420deg); opacity: 0; }
+    }
 
     /* THE SEAM LINE */
     .gate-seam {
@@ -1406,20 +1430,6 @@
       <path d="M6 6 Q22 6 22 22 Q22 38 38 38 Q54 38 54 54 Q54 70 70 70" stroke="#d4a457" stroke-width="1.4" fill="none"/>
       <circle cx="6" cy="6" r="3" fill="#d4a457"/><circle cx="22" cy="22" r="2.2" fill="#d4a457" opacity=".7"/>
     </svg>
-    <!-- lamp deco -->
-    <svg class="gate-lamp-deco" width="32" height="110" viewBox="0 0 32 110" xmlns="http://www.w3.org/2000/svg">
-      <line x1="16" y1="0" x2="16" y2="12" stroke="#b08030" stroke-width="1.4"/>
-      <ellipse cx="16" cy="14" rx="8" ry="3" fill="#d4a030"/>
-      <rect x="8" y="16" width="16" height="3" rx="1.4" fill="#d4a030"/>
-      <path d="M8,19 Q2,38 2,58 Q2,80 8,92 Q16,96 24,92 Q30,80 30,58 Q30,38 24,19 Z" fill="#bb1a10"/>
-      <path d="M8,19 Q2,38 2,58 Q2,80 8,92 Q16,96 24,92 Q30,80 30,58 Q30,38 24,19 Z" fill="url(#gsLng)" opacity=".7"/>
-      <defs><radialGradient id="gsLng" cx="50%" cy="46%" r="54%"><stop offset="0%" stop-color="#fff8d0"/><stop offset="60%" stop-color="#ff9900" stop-opacity=".5"/><stop offset="100%" stop-color="#cc4400" stop-opacity=".05"/></radialGradient></defs>
-      <rect x="8" y="92" width="16" height="3" rx="1.4" fill="#d4a030"/>
-      <ellipse cx="16" cy="95" rx="8" ry="3" fill="#d4a030"/>
-      <line x1="13" y1="98" x2="12" y2="108" stroke="#d4a030" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="16" y1="98" x2="16" y2="110" stroke="#d4a030" stroke-width="1.4" stroke-linecap="round"/>
-      <line x1="19" y1="98" x2="20" y2="108" stroke="#d4a030" stroke-width="1.2" stroke-linecap="round"/>
-    </svg>
   </div>
 
   <!-- Right door panel -->
@@ -1433,19 +1443,50 @@
       <path d="M6 6 Q22 6 22 22 Q22 38 38 38 Q54 38 54 54" stroke="#d4a457" stroke-width="1.4" fill="none"/>
       <circle cx="6" cy="6" r="3" fill="#d4a457"/>
     </svg>
-    <svg class="gate-lamp-deco" width="32" height="110" viewBox="0 0 32 110" xmlns="http://www.w3.org/2000/svg">
-      <line x1="16" y1="0" x2="16" y2="12" stroke="#b08030" stroke-width="1.4"/>
-      <ellipse cx="16" cy="14" rx="8" ry="3" fill="#d4a030"/>
-      <rect x="8" y="16" width="16" height="3" rx="1.4" fill="#d4a030"/>
-      <path d="M8,19 Q2,38 2,58 Q2,80 8,92 Q16,96 24,92 Q30,80 30,58 Q30,38 24,19 Z" fill="#bb1a10"/>
-      <path d="M8,19 Q2,38 2,58 Q2,80 8,92 Q16,96 24,92 Q30,80 30,58 Q30,38 24,19 Z" fill="url(#gsLng2)" opacity=".7"/>
-      <defs><radialGradient id="gsLng2" cx="50%" cy="46%" r="54%"><stop offset="0%" stop-color="#fff8d0"/><stop offset="60%" stop-color="#ff9900" stop-opacity=".5"/><stop offset="100%" stop-color="#cc4400" stop-opacity=".05"/></radialGradient></defs>
-      <rect x="8" y="92" width="16" height="3" rx="1.4" fill="#d4a030"/>
-      <ellipse cx="16" cy="95" rx="8" ry="3" fill="#d4a030"/>
-      <line x1="13" y1="98" x2="12" y2="108" stroke="#d4a030" stroke-width="1.2" stroke-linecap="round"/>
-      <line x1="16" y1="98" x2="16" y2="110" stroke="#d4a030" stroke-width="1.4" stroke-linecap="round"/>
-      <line x1="19" y1="98" x2="20" y2="108" stroke="#d4a030" stroke-width="1.2" stroke-linecap="round"/>
+  </div>
+
+  <!-- Toran garland at top -->
+  <div class="gate-toran" aria-hidden="true">
+    <svg viewBox="0 0 1200 88" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:80px;">
+      <path d="M0 12 Q150 52 300 14 Q450 52 600 14 Q750 52 900 14 Q1050 52 1200 14" fill="none" stroke="#7a5510" stroke-width="2.5"/>
+      <path d="M0 14 Q75 60 150 16"   fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <path d="M150 16 Q225 60 300 16" fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <path d="M300 16 Q375 60 450 16" fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <path d="M450 16 Q525 60 600 16" fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <path d="M600 16 Q675 60 750 16" fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <path d="M750 16 Q825 60 900 16" fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <path d="M900 16 Q975 60 1050 16" fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <path d="M1050 16 Q1125 60 1200 16" fill="rgba(150,16,16,.2)" stroke="rgba(150,16,16,.25)" stroke-width="1"/>
+      <g fill="#2d7a28" opacity=".9">
+        <ellipse cx="148"  cy="24" rx="12" ry="5.5" transform="rotate(-30 148 24)"/>
+        <ellipse cx="300"  cy="16" rx="12" ry="5.5" transform="rotate(28 300 16)"/>
+        <ellipse cx="452"  cy="22" rx="12" ry="5.5" transform="rotate(-22 452 22)"/>
+        <ellipse cx="560"  cy="30" rx="11" ry="5"   transform="rotate(18 560 30)"/>
+        <ellipse cx="640"  cy="30" rx="11" ry="5"   transform="rotate(-18 640 30)"/>
+        <ellipse cx="748"  cy="22" rx="12" ry="5.5" transform="rotate(22 748 22)"/>
+        <ellipse cx="900"  cy="16" rx="12" ry="5.5" transform="rotate(-28 900 16)"/>
+        <ellipse cx="1052" cy="24" rx="12" ry="5.5" transform="rotate(30 1052 24)"/>
+      </g>
+      <g>
+        <circle cx="75"   cy="34" r="14" fill="#e8840a"/><circle cx="75"   cy="34" r="9"  fill="#f5b830"/><circle cx="75"   cy="34" r="4.5" fill="#ffe878"/>
+        <circle cx="225"  cy="44" r="13" fill="#e8440a"/><circle cx="225"  cy="44" r="8"  fill="#f57830"/><circle cx="225"  cy="44" r="4"  fill="#ffcc50"/>
+        <circle cx="375"  cy="30" r="14" fill="#e8840a"/><circle cx="375"  cy="30" r="9"  fill="#f5b830"/><circle cx="375"  cy="30" r="4.5" fill="#ffe878"/>
+        <circle cx="525"  cy="40" r="14" fill="#e8440a"/><circle cx="525"  cy="40" r="9"  fill="#f57830"/><circle cx="525"  cy="40" r="4.5" fill="#ffcc50"/>
+        <circle cx="600"  cy="20" r="18" fill="#e8840a"/><circle cx="600"  cy="20" r="12" fill="#f5b830"/><circle cx="600"  cy="20" r="6"  fill="#fff0a0"/>
+        <circle cx="675"  cy="40" r="14" fill="#e8440a"/><circle cx="675"  cy="40" r="9"  fill="#f57830"/><circle cx="675"  cy="40" r="4.5" fill="#ffcc50"/>
+        <circle cx="825"  cy="30" r="14" fill="#e8840a"/><circle cx="825"  cy="30" r="9"  fill="#f5b830"/><circle cx="825"  cy="30" r="4.5" fill="#ffe878"/>
+        <circle cx="975"  cy="44" r="13" fill="#e8440a"/><circle cx="975"  cy="44" r="8"  fill="#f57830"/><circle cx="975"  cy="44" r="4"  fill="#ffcc50"/>
+        <circle cx="1125" cy="34" r="14" fill="#e8840a"/><circle cx="1125" cy="34" r="9"  fill="#f5b830"/><circle cx="1125" cy="34" r="4.5" fill="#ffe878"/>
+      </g>
     </svg>
+  </div>
+
+  <!-- Floating petals across gate -->
+  <div class="gate-petals-wrap" aria-hidden="true">
+    <div class="gate-fp"></div><div class="gate-fp"></div><div class="gate-fp"></div>
+    <div class="gate-fp"></div><div class="gate-fp"></div><div class="gate-fp"></div>
+    <div class="gate-fp"></div><div class="gate-fp"></div><div class="gate-fp"></div>
+    <div class="gate-fp"></div>
   </div>
 
   <!-- Gold seam -->
@@ -1834,7 +1875,22 @@
   </div>
 </section>
 
-<div class="plane-divider"><span class="plane-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#c8931a"><path d="M62 30.5L46 18l-2 2 8 10H36L24 8H18l8 22H6L2 24H0l2 8-2 8h2l4-6h20l-8 22h6l12-22h16l-8 10 2 2z"/></svg></span></div>
+<div class="orn-divider">
+  <svg class="orn-divider-motif" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="28" cy="28" r="27" stroke="rgba(212,164,87,.3)" stroke-width="1"/>
+    <circle cx="28" cy="28" r="22" stroke="rgba(212,164,87,.18)" stroke-width=".8"/>
+    <path d="M28 10 C22 16 20 22 28 26 C36 22 34 16 28 10Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M28 46 C22 40 20 34 28 30 C36 34 34 40 28 46Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M10 28 C16 22 22 20 26 28 C22 36 16 34 10 28Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M46 28 C40 22 34 20 30 28 C34 36 40 34 46 28Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M14.5 14.5 C18 16 20.5 19 21.5 23 C18 21 15 18.5 14.5 14.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M41.5 14.5 C38 16 35.5 19 34.5 23 C38 21 41 18.5 41.5 14.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M14.5 41.5 C18 40 20.5 37 21.5 33 C18 35 15 37.5 14.5 41.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M41.5 41.5 C38 40 35.5 37 34.5 33 C38 35 41 37.5 41.5 41.5Z" fill="rgba(212,164,87,.4)"/>
+    <circle cx="28" cy="28" r="4.5" fill="rgba(245,224,160,.8)"/>
+    <circle cx="28" cy="28" r="2.2" fill="#f5dda0"/>
+  </svg>
+</div>
 
 <!--  SECTION 4: EVENTS  -->
 <section class="timeline-section">
@@ -1929,7 +1985,22 @@
 -->
 
 <!--  VENUE SECTION  -->
-<div class="plane-divider"><span class="plane-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#c8931a"><path d="M62 30.5L46 18l-2 2 8 10H36L24 8H18l8 22H6L2 24H0l2 8-2 8h2l4-6h20l-8 22h6l12-22h16l-8 10 2 2z"/></svg></span></div>
+<div class="orn-divider">
+  <svg class="orn-divider-motif" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="28" cy="28" r="27" stroke="rgba(212,164,87,.3)" stroke-width="1"/>
+    <circle cx="28" cy="28" r="22" stroke="rgba(212,164,87,.18)" stroke-width=".8"/>
+    <path d="M28 10 C22 16 20 22 28 26 C36 22 34 16 28 10Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M28 46 C22 40 20 34 28 30 C36 34 34 40 28 46Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M10 28 C16 22 22 20 26 28 C22 36 16 34 10 28Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M46 28 C40 22 34 20 30 28 C34 36 40 34 46 28Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M14.5 14.5 C18 16 20.5 19 21.5 23 C18 21 15 18.5 14.5 14.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M41.5 14.5 C38 16 35.5 19 34.5 23 C38 21 41 18.5 41.5 14.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M14.5 41.5 C18 40 20.5 37 21.5 33 C18 35 15 37.5 14.5 41.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M41.5 41.5 C38 40 35.5 37 34.5 33 C38 35 41 37.5 41.5 41.5Z" fill="rgba(212,164,87,.4)"/>
+    <circle cx="28" cy="28" r="4.5" fill="rgba(245,224,160,.8)"/>
+    <circle cx="28" cy="28" r="2.2" fill="#f5dda0"/>
+  </svg>
+</div>
 
 <section class="venue-section" id="venueSection">
 
@@ -2045,13 +2116,13 @@
   const envObs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (e.isIntersecting) {
-        // small delay so envelope flip starts first
-        setTimeout(function () { inviteCard.classList.add('open'); }, 300);
+        // start envelope flip immediately, then open card after flip is well underway
         envSealed.classList.add('open');
+        setTimeout(function () { inviteCard.classList.add('open'); }, 850);
         envObs.disconnect();
       }
     });
-  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.35, rootMargin: '0px 0px -12% 0px' });
   envObs.observe(inviteCard);
 
   // 3-D tilt on invite card — enabled after slab reveal finishes
@@ -2161,19 +2232,13 @@
   }, { threshold: 0.2 });
   document.querySelectorAll('.cp-card').forEach(function(el) { cpObs.observe(el); });
 
-  // plane dividers: fly on scroll into view
-  var planeObs = new IntersectionObserver(function(entries) {
+  // ornamental dividers: fade-in on scroll
+  var ornObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.remove('fly');
-        // force reflow to restart animation
-        void e.target.offsetWidth;
-        e.target.classList.add('fly');
-        planeObs.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); ornObs.unobserve(e.target); }
     });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.plane-divider').forEach(function(el) { planeObs.observe(el); });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.orn-divider').forEach(function(el) { ornObs.observe(el); });
 
   // reveal on scroll (headings, footer etc.)
   const obs = new IntersectionObserver(function (entries) {
