@@ -2221,29 +2221,28 @@
 })();
 </script>
 
-<!-- YouTube IFrame API -->
+<!-- YouTube IFrame API — load first so callback is ready -->
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-(function () {
-  var ytPlayer, ytReady = false, wantPlay = false;
-  var btn = document.getElementById('musicBtn');
-  var playing = false;
+  var ytPlayer, ytReady = false, wantPlay = false, playing = false;
+  var ytBtn = document.getElementById('musicBtn');
 
   window.onYouTubeIframeAPIReady = function () {
     ytPlayer = new YT.Player('ytPlayer', {
       width: '200',
       height: '200',
-      videoId: '92mXA_slVhc',
+      videoId: 'MTWcCqJWG9M',
       playerVars: {
         autoplay: 0,
         loop: 1,
-        playlist: '92mXA_slVhc',
+        playlist: 'MTWcCqJWG9M',
         controls: 0,
         disablekb: 1,
         fs: 0,
         iv_load_policy: 3,
         modestbranding: 1,
         rel: 0,
-        origin: window.location.origin
+        origin: (location.protocol === 'file:' ? undefined : location.origin)
       },
       events: {
         onReady: function () {
@@ -2252,7 +2251,7 @@
           if (wantPlay) {
             ytPlayer.playVideo();
             playing = true;
-            btn.classList.remove('paused');
+            ytBtn.classList.remove('paused');
           }
         },
         onError: function (e) {
@@ -2262,37 +2261,34 @@
     });
   };
 
-  /* Called by the gate once it opens — user gesture satisfies autoplay policy */
   window.startMusic = function () {
     if (!playing) {
       wantPlay = true;
       if (ytReady) {
         ytPlayer.playVideo();
         playing = true;
-        btn.classList.remove('paused');
+        ytBtn.classList.remove('paused');
       }
     }
   };
 
-  btn.addEventListener('click', function () {
+  ytBtn.addEventListener('click', function () {
     if (!ytReady) {
       wantPlay = !wantPlay;
-      btn.classList.toggle('paused', !wantPlay);
+      ytBtn.classList.toggle('paused', !wantPlay);
       return;
     }
     if (playing) {
       ytPlayer.pauseVideo();
       playing = false;
-      btn.classList.add('paused');
+      ytBtn.classList.add('paused');
     } else {
       ytPlayer.playVideo();
       playing = true;
-      btn.classList.remove('paused');
+      ytBtn.classList.remove('paused');
     }
   });
-})();
 </script>
-<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 /* ===== SPLASH GATE LOGIC ===== */
