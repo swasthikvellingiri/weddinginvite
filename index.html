@@ -2296,11 +2296,12 @@
     ytPlayer = new YT.Player('ytPlayer', {
       width: '200',
       height: '200',
-      videoId: 'NOAU00Zeb7U',
+      videoId: 'MTWcCqJWG9M',
       playerVars: {
         autoplay: 0,
         loop: 1,
-        playlist: 'NOAU00Zeb7U',
+        start: 2,
+        playlist: 'MTWcCqJWG9M',
         controls: 0,
         disablekb: 1,
         fs: 0,
@@ -2411,12 +2412,6 @@
     setTimeout(function () { progressArc.style.transition = ''; }, 380);
     sealBtn.classList.remove('pressing');
   }
-
-  /* ---- start music on very first interaction with the gate ---- */
-  gate.addEventListener('pointerdown', function startMusicOnce() {
-    if (window.startMusic) window.startMusic();
-    gate.removeEventListener('pointerdown', startMusicOnce);
-  });
 
   /* ---- click the seal: open immediately ---- */
   sealBtn.addEventListener('click', openGate);
