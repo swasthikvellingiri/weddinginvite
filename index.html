@@ -14,7 +14,7 @@
     img, svg { max-width: 100%; }
 
     /* 
-       NAMES + LAMPS OVERLAY  (position:fixed, spans hero+temple)
+      NAMES + LAMPS OVERLAY  (position:fixed, spans hero+temple)
      */
     #namesOverlay {
       position: fixed;
@@ -1072,6 +1072,17 @@
       transform: scale(1.025);
       filter: saturate(1.1) brightness(.95);
     }
+    .venue-video {
+      width: 100%;
+      height: clamp(220px, 38vw, 400px);
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .venue-photo-wrap img:hover {
+      transform: scale(1.025);
+      filter: saturate(1.1) brightness(.95);
+    }
     .venue-dir-btn {
       display: inline-block; text-decoration: none;
       font-family: "Cinzel", serif;
@@ -2013,6 +2024,13 @@
     <span class="venue-rule"></span>
   </div>
 
+  <div class="venue-photo-wrap reveal" style="transition-delay:.24s">
+    <img
+      src="tkvpalani.png"
+      alt="TKV Palani Mahal, Coimbatore"
+      loading="lazy">
+  </div>
+
   <div class="venue-card reveal" style="transition-delay:.12s">
     <span class="venue-card-icon">&#x1F4CD;</span>
     <h3 class="venue-name">TKV Palani Mahal, Coimbatore</h3>
@@ -2026,12 +2044,6 @@
     </div>
   </div>
 
-  <div class="venue-photo-wrap reveal" style="transition-delay:.24s">
-    <img
-      src="tkvpalani.png"
-      alt="TKV Palani Mahal, Coimbatore"
-      loading="lazy">
-  </div>
 
   <div class="reveal" style="transition-delay:.32s">
     <a class="venue-dir-btn"
@@ -2045,14 +2057,35 @@
 
 <!--  SECTION 6: COUNTDOWN  -->
 
-<p class="page-footer reveal" style="transition-delay:.3s">
+<div class="orn-divider">
+  <svg class="orn-divider-motif" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="28" cy="28" r="27" stroke="rgba(212,164,87,.3)" stroke-width="1"/>
+    <circle cx="28" cy="28" r="22" stroke="rgba(212,164,87,.18)" stroke-width=".8"/>
+    <path d="M28 10 C22 16 20 22 28 26 C36 22 34 16 28 10Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M28 46 C22 40 20 34 28 30 C36 34 34 40 28 46Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M10 28 C16 22 22 20 26 28 C22 36 16 34 10 28Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M46 28 C40 22 34 20 30 28 C34 36 40 34 46 28Z" fill="rgba(212,164,87,.55)"/>
+    <path d="M14.5 14.5 C18 16 20.5 19 21.5 23 C18 21 15 18.5 14.5 14.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M41.5 14.5 C38 16 35.5 19 34.5 23 C38 21 41 18.5 41.5 14.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M14.5 41.5 C18 40 20.5 37 21.5 33 C18 35 15 37.5 14.5 41.5Z" fill="rgba(212,164,87,.4)"/>
+    <path d="M41.5 41.5 C38 40 35.5 37 34.5 33 C38 35 41 37.5 41.5 41.5Z" fill="rgba(212,164,87,.4)"/>
+    <circle cx="28" cy="28" r="4.5" fill="rgba(245,224,160,.8)"/>
+    <circle cx="28" cy="28" r="2.2" fill="#f5dda0"/>
+  </svg>
+</div>
+
+<p class="page-footer reveal" style="transition-delay:.3s; font-size: 2rem;">
   The countdown to our forever begins
 </p>
 <div class="venue-photo-wrap reveal" style="transition-delay:1.24s">
-  <img
-    src="anim.gif"
-    alt="The Couple's Countdown Animation"
-    loading="lazy">
+  <video
+    src="1774100717027.mov"
+    autoplay
+    muted
+    loop
+    playsinline
+    class="venue-video">
+  </video>
 </div>
 <section class="countdown-section" id="countdownSection">
   <div class="cdwn-heading reveal">
