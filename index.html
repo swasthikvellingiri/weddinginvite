@@ -227,14 +227,14 @@
       opacity: 0;
       animation: tPetalFall linear infinite;
     }
-    .t-petal:nth-child(1)  { left:  5%; width:7px;  height:11px; background:radial-gradient(#ffcc66,#e85c20 80%); animation-duration:9s;   animation-delay:0s;   }
-    .t-petal:nth-child(2)  { left: 15%; width:5px;  height:9px;  background:radial-gradient(#ff9944,#cc3300 80%); animation-duration:11s;  animation-delay:1.5s; }
-    .t-petal:nth-child(3)  { left: 28%; width:8px;  height:12px; background:radial-gradient(#ffdd88,#e86020 80%); animation-duration:8s;   animation-delay:3s;   }
-    .t-petal:nth-child(4)  { left: 42%; width:6px;  height:10px; background:radial-gradient(#ffaa44,#dd4400 80%); animation-duration:12s;  animation-delay:0.8s; }
-    .t-petal:nth-child(5)  { left: 58%; width:7px;  height:11px; background:radial-gradient(#ffcc66,#e85c20 80%); animation-duration:10s;  animation-delay:2.2s; }
-    .t-petal:nth-child(6)  { left: 72%; width:5px;  height:9px;  background:radial-gradient(#ff9944,#cc3300 80%); animation-duration:9.5s; animation-delay:4s;   }
-    .t-petal:nth-child(7)  { left: 85%; width:8px;  height:12px; background:radial-gradient(#ffdd88,#e86020 80%); animation-duration:11s;  animation-delay:1s;   }
-    .t-petal:nth-child(8)  { left: 93%; width:6px;  height:10px; background:radial-gradient(#ffaa44,#dd4400 80%); animation-duration:8.5s; animation-delay:3.5s; }
+    .t-petal:nth-child(1)  { left:  5%; width:7px;  height:11px; background:radial-gradient(ellipse, #ffcc66, #e85c20 80%); animation-duration:9s;   animation-delay:0s;   }
+    .t-petal:nth-child(2)  { left: 15%; width:5px;  height:9px;  background:radial-gradient(ellipse, #ff9944, #cc3300 80%); animation-duration:11s;  animation-delay:1.5s; }
+    .t-petal:nth-child(3)  { left: 28%; width:8px;  height:12px; background:radial-gradient(ellipse, #ffdd88, #e86020 80%); animation-duration:8s;   animation-delay:3s;   }
+    .t-petal:nth-child(4)  { left: 42%; width:6px;  height:10px; background:radial-gradient(ellipse, #ffaa44, #dd4400 80%); animation-duration:12s;  animation-delay:0.8s; }
+    .t-petal:nth-child(5)  { left: 58%; width:7px;  height:11px; background:radial-gradient(ellipse, #ffcc66, #e85c20 80%); animation-duration:10s;  animation-delay:2.2s; }
+    .t-petal:nth-child(6)  { left: 72%; width:5px;  height:9px;  background:radial-gradient(ellipse, #ff9944, #cc3300 80%); animation-duration:9.5s; animation-delay:4s;   }
+    .t-petal:nth-child(7)  { left: 85%; width:8px;  height:12px; background:radial-gradient(ellipse, #ffdd88, #e86020 80%); animation-duration:11s;  animation-delay:1s;   }
+    .t-petal:nth-child(8)  { left: 93%; width:6px;  height:10px; background:radial-gradient(ellipse, #ffaa44, #dd4400 80%); animation-duration:8.5s; animation-delay:3.5s; }
     @keyframes tPetalFall {
       0%   { transform: translateY(0)     rotate(0deg);   opacity: 0; }
       6%   { opacity: .75; }
@@ -1993,6 +1993,7 @@
   <div class="worlds-map-outer">
     <img src="map.png" alt="Map connecting Amsterdam to Coimbatore with a love arc" loading="lazy">
   </div>
+
 </section>
 
 <div class="plane-divider"><span class="plane-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#c8931a"><path d="M62 30.5L46 18l-2 2 8 10H36L24 8H18l8 22H6L2 24H0l2 8-2 8h2l4-6h20l-8 22h6l12-22h16l-8 10 2 2z"/></svg></span></div>
@@ -2326,72 +2327,51 @@
 })();
 </script>
 
-<!-- YouTube IFrame API — load first so callback is ready -->
-<script src="https://www.youtube.com/iframe_api"></script>
+<audio id="musicPlayer" loop preload="auto">
+  <source src="Mangalyam.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-  var ytPlayer, ytReady = false, wantPlay = false, playing = false;
-  var ytBtn = document.getElementById('musicBtn');
+  var audio   = document.getElementById('musicPlayer');
+  var ytBtn   = document.getElementById('musicBtn');
+  var playing = false;
+  var seekDone = false;
 
-  window.onYouTubeIframeAPIReady = function () {
-    ytPlayer = new YT.Player('ytPlayer', {
-      width: '1',
-      height: '1',
-      videoId: '6uHNJ4orwIg',
-      playerVars: {
-        autoplay: 0,
-        loop: 1,
-        playlist: '6uHNJ4orwIg',
-        start: 5,
-        controls: 0,
-        disablekb: 1,
-        fs: 0,
-        iv_load_policy: 3,
-        modestbranding: 1,
-        rel: 0,
-        origin: window.location.origin || 'null'
-      },
-      events: {
-        onReady: function () {
-          ytReady = true;
-          ytPlayer.setVolume(20);
-          if (wantPlay) { ytPlayer.playVideo(); }
-        },
-        onStateChange: function () {
-          ytPlayer.setVolume(20);
-        },
-        onError: function (e) {
-          console.warn('YT player error:', e.data);
-        }
-      }
-    });
-  };
+  audio.volume = 0.2;
 
+  audio.addEventListener('canplaythrough', function seekOnce() {
+    if (!seekDone) {
+      seekDone = true;
+      audio.currentTime = 5;
+    }
+    audio.removeEventListener('canplaythrough', seekOnce);
+  });
 
-  window.startMusic = function () {
-    if (!playing) {
-      wantPlay = true;
-      if (ytReady) {
-        ytPlayer.playVideo();
+  function startMusic() {
+    if (playing) return;
+    var p = audio.play();
+    if (p && p.catch) {
+      p.then(function () {
         playing = true;
         ytBtn.classList.remove('paused');
-      }
+      }).catch(function (e) {
+        console.warn('Audio play blocked:', e);
+      });
+    } else {
+      playing = true;
+      ytBtn.classList.remove('paused');
     }
-  };
+  }
+
+  window.startMusic = startMusic;
 
   ytBtn.addEventListener('click', function () {
-    if (!ytReady) {
-      wantPlay = !wantPlay;
-      ytBtn.classList.toggle('paused', !wantPlay);
-      return;
-    }
     if (playing) {
-      ytPlayer.pauseVideo();
+      audio.pause();
       playing = false;
       ytBtn.classList.add('paused');
     } else {
-      ytPlayer.playVideo();
-      playing = true;
-      ytBtn.classList.remove('paused');
+      startMusic();
     }
   });
 </script>
@@ -2405,21 +2385,20 @@
   var circumference = 301.6;
   var LONG_PRESS_MS = 700;
 
-  var longPressTimer  = null;
-  var animFrameId     = null;
-  var pressStartTime  = null;
-  var pressing        = false;
+  var animFrameId    = null;
+  var pressStartTime = null;
+  var pressing       = false;
 
-  /* ---- open the gate ---- */
   function openGate() {
     cancelLongPress();
     gate.classList.add('opening');
     document.body.classList.remove('gate-locked');
+    // Call startMusic directly in the user-gesture call stack
     if (window.startMusic) window.startMusic();
-    setTimeout(function () {
-      gate.style.display = 'none';
-    }, 1350);
+    setTimeout(function () { gate.style.display = 'none'; }, 1350);
   }
+
+  // ...existing code...
 
   /* ---- progress animation (rAF-driven) ---- */
   function tickProgress(ts) {
