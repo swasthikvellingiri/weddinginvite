@@ -2342,7 +2342,7 @@
   audio.addEventListener('canplaythrough', function seekOnce() {
     if (!seekDone) {
       seekDone = true;
-      audio.currentTime = 5;
+      audio.currentTime = 0;
     }
     audio.removeEventListener('canplaythrough', seekOnce);
   });
