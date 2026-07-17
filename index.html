@@ -69,6 +69,7 @@
       color: rgba(240,220,180,.7);
       font-style: italic;
     }
+    /* --- Story Section Styling --- */
 
     /* 
        HANGING LANTERNS  (modern decorative paper lanterns)
@@ -1102,6 +1103,97 @@
 
     /* ===== SPLASH GATE ===== */
     body.gate-locked { overflow: hidden; }
+    /* --- Story Section (Paper Effect with Animation) --- */
+/* --- Vintage Parchment Wrapper --- */
+    .gate-story-wrapper {
+      position: relative;
+      margin: 40px auto 60px auto; 
+      text-align: center;
+      max-width: 85%;
+      /* Use CSS drop-shadow instead of box-shadow to hug the torn edges properly */
+      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 4px rgba(212, 164, 87, 0.2));
+      transform-origin: top center;
+      animation: unfoldLetter 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.4s both;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: transform;
+      /* UPDATED ANIMATION */
+      transform-origin: top center;
+      animation: rollOut 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+    }
+
+    /* --- The Torn Paper Background --- */
+    .gate-paper-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #fdfaf3; /* Richer ivory */
+      /* Adds a subtle paper grain noise pattern over the background */
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      /* Applies the SVG displacement map to roughen the edges */
+      filter: url(#torn-edge);
+      z-index: 1;
+    }
+
+    /* --- Content & Ornaments --- */
+    .gate-story-content {
+      position: relative;
+      z-index: 2; /* Keeps text layered above the paper background */
+      padding: 40px 20px 30px 20px; /* Extra top padding for the ornaments */
+      transform: translateZ(0);
+    }
+
+    .gate-ornament {
+      position: absolute;
+      top: 8px;
+      z-index: 2;
+      opacity: 0.6; /* Softly blends into the paper */
+    }
+
+    .gate-ornament.left { left: 8px; width: 45px; }
+    .gate-ornament.right { right: 8px; width: 45px; transform: scaleX(-1); } /* Mirrors the left ornament */
+    .gate-ornament.center { left: 50%; transform: translateX(-50%); width: 70px; top: 8px; }
+
+    /* --- Typography --- */
+    .gate-story-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      color: #6d4b12; /* Deepened the gold to a richer vintage brown */
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .gate-story-text {
+      font-family: "Lora", "Times New Roman", serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #4a3d30; /* Softer vintage charcoal */
+      margin: 0;
+    }
+
+    /* --- The Unfold Animation --- */
+    /* --- The Unroll Animation --- */
+    @keyframes rollOut {
+      0% {
+        opacity: 0;
+        /* 'inset' hides everything starting from the bottom edge, pulling all the way to the top */
+        clip-path: inset(0 0 100% 0); 
+        /* Starts slightly higher up */
+        transform: translateY(-30px); 
+      }
+      20% {
+        opacity: 1; /* Fades in quickly at the top so you see the start of the unroll */
+      }
+      100% {
+        opacity: 1;
+        /* The clip-path moves down, revealing the entire letter */
+        clip-path: inset(0 0 0 0); 
+        /* Settles into its natural position */
+        transform: translateY(0); 
+      }
+    }
     #splashGate {
       position: fixed;
       inset: 0;
@@ -1271,6 +1363,7 @@
       text-transform: uppercase;
       color: #d4a457;
       margin: 0.65rem 0;
+      transform: translateX(3px);
     }
     .gate-name-bride {
       font-family: "Great Vibes", cursive;
@@ -1352,14 +1445,43 @@
       line-height: 1;
     }
     /* hint text */
+    /* --- Names Side-by-Side Layout --- */
+    .gate-names-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 16px; /* Adjust this to change the space between the words */
+      margin: 15px 0 40px 0; /* Pushes the entire row down from the label, and pushes the seal down */
+      width: 100%;
+    }
+
+    .gate-names-row p {
+      margin: 0; /* Removes default vertical paragraph spacing to keep them perfectly aligned */
+    }
+
+    /* Ensure 'weds' looks distinct in the middle */
+    /* Ensure 'weds' looks distinct in the middle */
+    .gate-weds-line {
+      font-family: "Montserrat", sans-serif; /* Or your preferred small, clean font */
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: #d4a457;
+      opacity: 0.6; /* Lowered opacity for a softer look */
+      text-transform: none; /* Removes uppercase */
+      margin-top: 5px; 
+    }
+
+    /* --- Spacing Fix for Text Below Button --- */
+    /* --- Spacing Fix for Text Below Button --- */
     .gate-hint {
-      font-family: "Cinzel", serif;
-      font-size: clamp(0.5rem, 1vw, 0.65rem);
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: rgba(212,164,87,.48);
-      animation: gateHintPulse 3s ease-in-out infinite;
-      pointer-events: none;
+      margin-top: 45px; 
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: #a09078;
+      opacity: 0.5; /* Lowered opacity so it fades into the background more */
+      text-transform: none; /* Removes uppercase */
     }
     @keyframes gateHintPulse {
       0%,100% { opacity: 0.48; }
@@ -1505,10 +1627,62 @@
 
   <!-- Centre content -->
   <div class="gate-content">
+    
+    <!-- New Story Section -->
+<!-- New Story Section (Paper Element) -->
+<!-- New Story Section (Vintage Parchment) -->
+    <div class="gate-story-wrapper">
+      
+      <!-- The torn paper background -->
+      <div class="gate-paper-bg"></div>
+
+      <!-- Top Left Ornament -->
+      <svg class="gate-ornament left" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5,10 C15,5 25,20 35,10 C40,5 45,15 45,25" stroke="#d4a457" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="5" cy="10" r="1.5" fill="#d4a457"/><circle cx="35" cy="10" r="1.5" fill="#d4a457"/>
+      </svg>
+
+      <!-- Top Center Ornament -->
+      <svg class="gate-ornament center" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40,22 C30,12 32,5 40,8 C48,5 50,12 40,22 Z" stroke="#d4a457" fill="none" stroke-width="1" stroke-linecap="round"/>
+        <path d="M20,12 Q30,12 35,8" stroke="#d4a457" fill="none" stroke-width="1" stroke-linecap="round"/>
+        <path d="M60,12 Q50,12 45,8" stroke="#d4a457" fill="none" stroke-width="1" stroke-linecap="round"/>
+      </svg>
+
+      <!-- Top Right Ornament -->
+      <svg class="gate-ornament right" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5,10 C15,5 25,20 35,10 C40,5 45,15 45,25" stroke="#d4a457" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="5" cy="10" r="1.5" fill="#d4a457"/><circle cx="35" cy="10" r="1.5" fill="#d4a457"/>
+      </svg>
+
+      <!-- The Text Content -->
+      <div class="gate-story-content">
+        <h2 class="gate-story-title">Our Longest Love Letter</h2>
+        <p class="gate-story-text">
+          A story we began years ago, still being written. Not every narrative follows a straight line, and ours took a few twists to find its perfect rhythm. Four years of distance only brought us back to where we belong. Six years of writing this chapter together, and here is the next page.
+        </p>
+      </div>
+    </div>
+    <!-- /New Story Section -->
+
+    <!-- INVISIBLE SVG FILTER FOR TORN EDGES (Place anywhere in body) -->
+    <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
+      <filter id="torn-edge" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+    <!-- /New Story Section -->
+
     <p class="gate-pre-label">A Wedding Invitation</p>
-    <p class="gate-name-groom">Swasthik</p>
-    <p class="gate-weds-line">Weds</p>
-    <p class="gate-name-bride">Priyanga</p>
+
+    <!-- Names Row Section -->
+    <div class="gate-names-row">
+      <p class="gate-name-groom">Swasthik</p>
+      <p class="gate-weds-line">weds</p>
+      <p class="gate-name-bride">Priyanga</p>
+    </div>
+    <!-- /Names Row Section -->
 
     <!-- Interactive seal -->
     <div class="gate-seal-wrap">
@@ -1527,7 +1701,7 @@
       </button>
     </div>
 
-    <p class="gate-hint">Tap centre &nbsp;&middot;&nbsp; or hold anywhere to reveal</p>
+    <p class="gate-hint">Tap center to reveal</p>
     <p class="gate-date-hint">23 &middot; 08 &middot; 2026</p>
   </div>
 
