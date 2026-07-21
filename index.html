@@ -175,15 +175,16 @@
     }
 
     /* Your exact CSS from index.html */
-.scroll-cue {
+    .scroll-cue {
       position: absolute;
-      bottom: 26px; left: 50%;
+      /* Lifted from 26px to 8vh to clear mobile browser toolbars */
+      bottom: 8vh; 
+      left: 50%;
       transform: translateX(-50%);
       font-size: 0.7rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      /* Increased opacity from .5 to 1 for maximum brightness */
-      color: rgba(215, 175, 100, 2);
+      color: rgba(215, 175, 100, 1);
       animation: bob 2.4s ease-in-out infinite;
       z-index: 8;
     }
