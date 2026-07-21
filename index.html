@@ -176,9 +176,8 @@
 
     /* Your exact CSS from index.html */
     .scroll-cue {
-      position: absolute;
-      /* Using a percentage forces it to adapt to the container's true height */
-      bottom: 5%; 
+      position: fixed; 
+      bottom: 25px;    
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.7rem;
@@ -186,14 +185,21 @@
       text-transform: uppercase;
       color: rgba(215, 175, 100, 1);
       animation: bob 2.4s ease-in-out infinite;
-      z-index: 20; /* Bumped up to easily clear the background gradients */
+      z-index: 9000;    /* Super high z-index */
+      transition: opacity 0.5s ease; 
     }
+    
+    /* This draws the line below the text - make sure this is still here! */
     .scroll-cue::after {
       content: ""; display: block;
       margin: 6px auto 0;
       width: 1px; height: 24px;
-      /* Increased opacity from .5 to .9 for a brighter line */
       background: linear-gradient(180deg, rgba(200, 150, 70, 0.9), transparent);
+    }
+
+    .scroll-cue.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
     @keyframes bob {
       0%,100% { transform: translateX(-50%) translateY(0); }
@@ -1936,8 +1942,6 @@
       </g>
     </svg>
   </div>
-  <!-- ADD THIS LINE HERE -->
-  <div class="scroll-cue">Scroll</div>
 
 </section><!-- /heroSection -->
 
@@ -2005,7 +2009,6 @@
   <div class="temple-caption">
     <p>23 &middot; 08 &middot; 2026 &nbsp;&bull;&nbsp; Coimbatore</p>
   </div>
-  <div class="scroll-cue">Scroll</div>
 </section>
 
 <!--  SECTION 3: INVITATION CARD  -->
@@ -2515,6 +2518,7 @@
   setInterval(tick, 1000);
 })();
 </script>
+<div class="scroll-cue">Scroll</div>
 
 <audio id="musicPlayer" loop preload="auto">
   <source src="Mangalyam.mp3" type="audio/mpeg">
@@ -2564,7 +2568,25 @@
     }
   });
 </script>
+<script>
+  // Dynamic Scroll Cue Fade
+  function checkScrollCue() {
+    var scrollCue = document.querySelector('.scroll-cue');
+    if (scrollCue) {
+      if (window.scrollY > 100) {
+        scrollCue.classList.add('hidden');
+      } else {
+        scrollCue.classList.remove('hidden');
+      }
+    }
+  }
 
+  // Check when scrolling
+  window.addEventListener('scroll', checkScrollCue, { passive: true });
+  
+  // Check once immediately on load
+  checkScrollCue();
+</script>
 <script>
 /* ===== SPLASH GATE LOGIC ===== */
 (function () {
