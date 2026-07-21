@@ -174,14 +174,16 @@
       100% { transform: translateY(110vh) rotate(380deg); opacity:0; }
     }
 
-    .scroll-cue {
+    /* Your exact CSS from index.html */
+.scroll-cue {
       position: absolute;
       bottom: 26px; left: 50%;
       transform: translateX(-50%);
       font-size: 0.7rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(215,175,100,.5);
+      /* Increased opacity from .5 to 1 for maximum brightness */
+      color: rgba(215, 175, 100, 2);
       animation: bob 2.4s ease-in-out infinite;
       z-index: 8;
     }
@@ -189,7 +191,8 @@
       content: ""; display: block;
       margin: 6px auto 0;
       width: 1px; height: 24px;
-      background: linear-gradient(180deg, rgba(200,150,70,.5), transparent);
+      /* Increased opacity from .5 to .9 for a brighter line */
+      background: linear-gradient(180deg, rgba(200, 150, 70, 0.9), transparent);
     }
     @keyframes bob {
       0%,100% { transform: translateX(-50%) translateY(0); }
@@ -1932,6 +1935,8 @@
       </g>
     </svg>
   </div>
+  <!-- ADD THIS LINE HERE -->
+  <div class="scroll-cue">Scroll</div>
 
 </section><!-- /heroSection -->
 
@@ -1999,6 +2004,7 @@
   <div class="temple-caption">
     <p>23 &middot; 08 &middot; 2026 &nbsp;&bull;&nbsp; Coimbatore</p>
   </div>
+  <div class="scroll-cue">Scroll</div>
 </section>
 
 <!--  SECTION 3: INVITATION CARD  -->
