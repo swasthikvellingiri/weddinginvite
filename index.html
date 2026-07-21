@@ -175,26 +175,41 @@
     }
 
     /* Your exact CSS from index.html */
+    /* Keep this main block exactly as you have it */
     .scroll-cue {
       position: fixed; 
-      bottom: 25px;    
+      bottom: 30px; /* Lifted slightly since there is no text */
       left: 50%;
       transform: translateX(-50%);
-      font-size: 0.7rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(215, 175, 100, 1);
       animation: bob 2.4s ease-in-out infinite;
-      z-index: 9000;    /* Super high z-index */
+      z-index: 9000;    
       transition: opacity 0.5s ease; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
-    /* This draws the line below the text - make sure this is still here! */
+    /* 1. The top 'V' */
+    .scroll-cue::before {
+      content: "";
+      display: block;
+      width: 18px;  /* Made slightly larger since it stands alone */
+      height: 18px;
+      border-bottom: 2px solid #ffffff; /* Pure white */
+      border-right:  2px solid #ffffff; /* Pure white */
+      transform: rotate(45deg); 
+    }
+
+    /* 2. The bottom 'V' */
     .scroll-cue::after {
-      content: ""; display: block;
-      margin: 6px auto 0;
-      width: 1px; height: 24px;
-      background: linear-gradient(180deg, rgba(200, 150, 70, 0.9), transparent);
+      content: "";
+      display: block;
+      width: 18px; 
+      height: 18px;
+      border-bottom: 2px solid #ffffff; /* Pure white */
+      border-right:  2px solid #ffffff; /* Pure white */
+      /* Pulls the second 'V' up slightly to nest it */
+      transform: translateY(-8px) rotate(45deg); 
     }
 
     .scroll-cue.hidden {
@@ -2069,7 +2084,7 @@
 
         <!-- <p class="cb-dress">Dress code &ensp;&mdash;&ensp; <strong>Traditional Indian Attire</strong></p> -->
 
-        <a class="rsvp-btn" href="https://wa.me/31616754887?text=Hi!%0A%0AI%20would%20like%20to%20confirm%20my%20attendance%20for%20your%20wedding.%0A%0ALooking%20forward%20to%20celebrating!">Confirm Attendance</a>
+        <a class="rsvp-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSca-lRqq_o4vt9X9VtXko9mxJFxQNXt4fgBK2iRlAWxNUObWQ/viewform?usp=sharing&ouid=110930981628698429317">Confirm Attendance</a>
 
       </div>
 
@@ -2518,7 +2533,7 @@
   setInterval(tick, 1000);
 })();
 </script>
-<div class="scroll-cue">Scroll</div>
+<div class="scroll-cue"></div>
 
 <audio id="musicPlayer" loop preload="auto">
   <source src="Mangalyam.mp3" type="audio/mpeg">
