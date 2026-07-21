@@ -177,8 +177,8 @@
     /* Your exact CSS from index.html */
     .scroll-cue {
       position: absolute;
-      /* Lifted from 26px to 8vh to clear mobile browser toolbars */
-      bottom: 8vh; 
+      /* Using a percentage forces it to adapt to the container's true height */
+      bottom: 5%; 
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.7rem;
@@ -186,7 +186,7 @@
       text-transform: uppercase;
       color: rgba(215, 175, 100, 1);
       animation: bob 2.4s ease-in-out infinite;
-      z-index: 8;
+      z-index: 20; /* Bumped up to easily clear the background gradients */
     }
     .scroll-cue::after {
       content: ""; display: block;
@@ -205,7 +205,7 @@
      */
     #templeSection {
       position: relative;
-      height: 100vh;
+      height: 100dvh;
       overflow: hidden;
       background: #050811;
     }
