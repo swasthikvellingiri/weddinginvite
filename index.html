@@ -1139,41 +1139,51 @@
     body.gate-locked { overflow: hidden; }
     /* --- Story Section (Paper Effect with Animation) --- */
     /* --- Vintage Parchment Wrapper --- */
+    /* --- Vintage Parchment Wrapper (Updated to Glass Wrapper) --- */
     .gate-story-wrapper {
       position: relative;
       margin: 40px auto 60px auto; 
       text-align: center;
       max-width: 85%;
-      /* Use CSS drop-shadow instead of box-shadow to hug the torn edges properly */
-      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 4px rgba(212, 164, 87, 0.2));
+      border-radius: 12px; /* Smooth corners for glass */
       transform-origin: top center;
-      animation: unfoldLetter 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.4s both;
       transform: translateZ(0);
       backface-visibility: hidden;
       will-change: transform;
-      /* UPDATED ANIMATION */
-      transform-origin: top center;
       animation: rollOut 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
     }
 
-    /* --- The Torn Paper Background --- */
+    /* --- The Glassmorphism Background --- */
     .gate-paper-bg {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #fdfaf3; /* Richer ivory */
-      /* Adds a subtle paper grain noise pattern over the background */
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-      /* Applies the SVG displacement map to roughen the edges */
-      filter: url(#torn-edge);
+      background-color: rgba(15, 10, 5, 0.4); /* Dark, semi-transparent base */
+      backdrop-filter: blur(8px); /* The frosted glass blur */
+      -webkit-backdrop-filter: blur(8px); /* Safari support */
+      border: 1px solid rgba(212, 164, 87, 0.25); /* Subtle gold border */
+      border-radius: 12px; /* Smooth corners */
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* Soft, elegant shadow */
       z-index: 1;
     }
 
-    /* --- Content & Ornaments --- */
-    .gate-story-content {
-      position: relative;
-      z-index: 2; /* Keeps text layered above the paper background */
-      padding: 40px 20px 30px 20px; /* Extra top padding for the ornaments */
-      transform: translateZ(0);
+    /* --- Typography (Updated for Dark Background) --- */
+    .gate-story-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      color: #f5dda0; /* Elegant light gold */
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .gate-story-text {
+      font-family: "Lora", "Times New Roman", serif;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: rgba(245, 234, 208, 0.85); /* Soft off-white for readability */
+      margin: 0;
     }
 
     .gate-ornament {
@@ -1186,26 +1196,6 @@
     .gate-ornament.left { left: 8px; width: 45px; }
     .gate-ornament.right { right: 8px; width: 45px; transform: scaleX(-1); } /* Mirrors the left ornament */
     .gate-ornament.center { left: 50%; transform: translateX(-50%); width: 70px; top: 8px; }
-
-    /* --- Typography --- */
-    .gate-story-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.3rem;
-      color: #6d4b12; /* Deepened the gold to a richer vintage brown */
-      margin-top: 0;
-      margin-bottom: 12px;
-      font-style: italic;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    .gate-story-text {
-      font-family: "Lora", "Times New Roman", serif;
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: #4a3d30; /* Softer vintage charcoal */
-      margin: 0;
-    }
 
     /* --- The Unfold Animation --- */
     /* --- The Unroll Animation --- */
@@ -1697,15 +1687,6 @@
         </p>
       </div>
     </div>
-    <!-- /New Story Section -->
-
-    <!-- INVISIBLE SVG FILTER FOR TORN EDGES (Place anywhere in body) -->
-    <svg style="width:0; height:0; position:absolute;" aria-hidden="true" focusable="false">
-      <filter id="torn-edge" x="-10%" y="-10%" width="120%" height="120%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </svg>
     <!-- /New Story Section -->
 
     <p class="gate-pre-label">A Wedding Invitation</p>
