@@ -13,9 +13,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedding Invitation | Swasthik &amp; Priyanga</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Noto+Serif+Tamil:wght@400;600&family=Noto+Sans+Brahmi&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -1567,6 +1568,39 @@
       0%   { transform: scaleY(.35); }
       100% { transform: scaleY(1);   }
     }
+    /* --- Brahmi Script Additions --- */
+    /* --- Vatteluthu Script Additions (Two Images) --- */
+    .vatteluthu-line {
+      margin-top: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem; /* Adjusts the space between the images and the star */
+    }
+    
+    .vatteluthu-img {
+      height: 40px; /* Adjust to scale both name images */
+      width: auto;
+      
+      /* Inverts the white background to transparent and turns the black text gold */
+      filter: invert(1) sepia(1) saturate(5) hue-rotate(5deg) brightness(1.1) drop-shadow(0 0 15px rgba(220,150,40,.6));
+      mix-blend-mode: screen;
+    }
+
+    .vatteluthu-separator {
+      color: rgba(212,164,87,.8);
+      font-size: 1.2rem;
+      text-shadow: 0 0 15px rgba(220,150,40,.6);
+    }
+    
+    .brahmi-cap {
+      margin-top: 0.6rem;
+      margin-bottom: 0.5rem;
+      font-family: "Cormorant Garamond", serif; 
+      font-style: italic;
+      color: rgba(230,200,150,.6); 
+      font-size: clamp(.75rem, 1.2vw, .9rem);
+    }
   </style>
 </head>
 <body class="gate-locked">
@@ -1992,6 +2026,7 @@
   </div>
 
   <!-- Couple names -->
+<!-- Couple names -->
   <div class="temple-names">
     <span class="temple-om">&#x0950;</span>
     <span class="temple-subtitle">A Hindu Tamil Wedding</span>
@@ -1999,6 +2034,20 @@
     <span class="temple-groom">ஸ்வஸ்திக்</span>
     <span class="temple-weds">Weds</span>
     <span class="temple-bride">பிரியங்கா</span>
+    
+    <!-- Added Vatteluthu Script Images -->
+    <div class="vatteluthu-line">
+      <!-- Replace with your exact image name for Swasthik -->
+      <img src="swasthik.png" alt="Swasthik in Vatteluthu script" class="vatteluthu-img">
+      
+      <!-- Decorative separator between the names -->
+      <span class="vatteluthu-separator">✦</span>
+      
+      <!-- Replace with your exact image name for Priyanga -->
+      <img src="priyanga.png" alt="Priyanga in Vatteluthu script" class="vatteluthu-img">
+    </div>
+    <!-- <p class="brahmi-cap">our names in Vatteluthu &mdash; the ancient South Indian script</p> -->
+
     <div class="temple-bottom-rule"><span>✦</span></div>
   </div>
 
@@ -2055,7 +2104,7 @@
 
         <!-- Date + Venue -->
         <div class="cb-datetime">
-          <span class="cb-datetime-date">Saturday, 22<sup>rd</sup> August 2026</span>
+          <span class="cb-datetime-date">Saturday, 22<sup>nd</sup> August 2026</span>
           <span class="cb-datetime-nakshatra">Reception &bull; 6:00 PM &ndash; 9:00 PM</span>
           <span class="cb-datetime-venue">
             TKV Palani Mahal, Mettupalayam, Coimbatore
