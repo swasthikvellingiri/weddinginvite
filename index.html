@@ -13,6 +13,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wedding Invitation | Swasthik &amp; Priyanga</title>
+  <!-- Open Graph / Chat App Description (WhatsApp, Facebook, iMessage) -->
+  <meta property="og:description" content="I am excited to invite you to my wedding! Please join us for the Reception on August 22nd, followed by Wedding on August 23rd at TKV Palani Mahal, Mettupalayam, Coimbatore.">
+  <meta property="og:title" content="Swasthik & Priyanga's Wedding Invitation">
+  <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="icon1.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -331,11 +335,14 @@
     }
     .temple-weds {
       display: block;
+      color: #D4AF37; 
+      
+      /* Higher Opacity (1 is fully solid, 0 is invisible) */
+      opacity: 0.95; 
       font-family: "Cinzel", serif;
       font-size: clamp(0.6rem, 1.5vw, 0.88rem);
       letter-spacing: 0.5em;
       text-transform: uppercase;
-      color: #d4a457;
       margin: 0.65rem 0;
     }
     .temple-bride {
@@ -365,7 +372,8 @@
       font-size: clamp(0.6rem, 1.4vw, 0.82rem);
       letter-spacing: 0.42em;
       text-transform: uppercase;
-      color: rgba(212,164,87,.75);
+      color: #D4AF37; 
+      opacity: 0.95;
       text-shadow: 0 2px 14px rgba(0,0,0,.8);
     }
 
@@ -1604,6 +1612,25 @@
       color: rgba(230,200,150,.6); 
       font-size: clamp(.75rem, 1.2vw, .9rem);
     }
+    .weds-text {
+      /* The Gold Color */
+      color: #D4AF37; 
+      
+      /* Higher Opacity (1 is fully solid, 0 is invisible) */
+      opacity: 0.95; 
+      
+      /* Typography & Alignment */
+      text-align: center;
+      font-size: 1.2rem;
+      letter-spacing: 0.5rem; /* Gives it that elegant, spaced-out look */
+      text-transform: uppercase;
+      
+      /* Spacing around the word */
+      margin: 15px 0; 
+      
+      /* Optional: Adds a tiny dark shadow to help it stand out against the bright background */
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); 
+    }
   </style>
 </head>
 <body class="gate-locked">
@@ -2035,7 +2062,7 @@
     <span class="temple-subtitle">A Hindu Tamil Wedding</span>
     <div class="temple-top-rule"><span>✦</span></div>
     <span class="temple-groom">ஸ்வஸ்திக்</span>
-    <span class="temple-weds">Weds</span>
+    <div class="temple-weds">WEDS</div>
     <span class="temple-bride">பிரியங்கா</span>
     
     <!-- Added Vatteluthu Script Images -->
@@ -2112,7 +2139,7 @@
           <span class="cb-datetime-venue">
             TKV Palani Mahal, Mettupalayam, Coimbatore
           </span>
-          <span class="cb-datetime-reception">Wedding &bull; Sunday, 23<sup>rd</sup> August &bull; 7:00 AM &mdash; 8:00 AM</span>
+          <span class="cb-datetime-reception">Wedding &bull; Sunday, 23<sup>rd</sup> August &bull; 7:30 AM &mdash; 8:30 AM</span>
         </div>
 
         <!-- <p class="cb-dress">Dress code &ensp;&mdash;&ensp; <strong>Traditional Indian Attire</strong></p> -->
@@ -2185,7 +2212,7 @@
         <span class="ev-num">03</span>
         <span class="ev-day">Saturday, 22 August 2026</span>
         <p class="ev-name">Varavetpu Vizha (Reception)</p>
-        <p class="ev-when">6:00 PM &mdash; 9:00 PM &bull; TKV Palani Mahal</p>
+        <p class="ev-when">6:00 PM &mdash; 9:00 PM &bull;</p>
         <p class="ev-details">Celebrate the soon-to-be newlyweds in a lavish evening of warmth and music, joined by other guests sharing their blessings as two families become one.</p>
         <span class="ev-tag">Dinner &bull; Music &bull; Celebrations</span>
       </div>
@@ -2197,8 +2224,8 @@
         <span class="ev-num">04</span>
         <span class="ev-day">Wedding Day &mdash; Sunday, 23 August 2026</span>
         <p class="ev-name">Muhurtham (Wedding)</p>
-        <p class="ev-when">7:00 AM &ndash; 8:00 AM &bull; TKV Palani Mahal</p>
-        <p class="ev-details">At the sacred fire, Swasthik ties the thaali around Priyanga's neck, two souls united for eternity at the auspicious muhurtham, blessed by family and the stars above.</p>
+        <p class="ev-when">7:30 AM &ndash; 8:30 AM &bull;</p>
+        <p class="ev-details">At the sacred fire, Swasthik ties the maangalyam around Priyanga's neck, two souls united for eternity at the auspicious muhurtham, blessed by family and the stars above.</p>
         <span class="ev-tag">Homa &bull; Thali &bull; Vedic Rites</span>
       </div>
     </div>
@@ -2280,9 +2307,9 @@
 <!--   <p class="venue-desc">
       Situated near Mettupalayam on the outskirts of Coimbatore, TKV Palani Mahal blends traditional charm with spacious elegance. 
     </p> -->
-    <div class="venue-address">
+    <!-- <div class="venue-address">
       &#x2726;&ensp;TKV Palani Mahal, Mettupalayam, Tamil Nadu&ensp;&#x2726;
-    </div>
+    </div>-->
   </div>
 
 
